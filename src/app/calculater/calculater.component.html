@@ -1,0 +1,51 @@
+<div class="container pt-5">
+
+    <h2 class="h3">Personal Fee</h2>
+    <form 
+    [formGroup]="feesForm" (ngSubmit)="onSubmit()">
+        <div 
+        formArrayName="usersArray"
+        *ngFor="let feeFormGroup of usersArray.controls; let i=index">
+            <div class="form-row align-items-center mb-3"
+            [formGroup]="feeFormGroup" >
+               
+                <div class="col-sm-3">
+                    <input type="text" class="form-control" placeholder="Name"
+                    formControlName="name">
+                </div>
+                <div class="col-sm-3">
+                    
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">$</div>
+                        </div>
+                        <input type="text" class="form-control" placeholder="0.00"
+                        formControlName="fee">
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="form-check">
+                        <input type="checkbox" class="form-check-input"
+                        formControlName="tax">
+                        <label class="form-check-label">Tax</label>
+                
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <button class="btn btn-sm btn-outline-secondary"
+                    (click)="deleteRow(i)">Delete</button>
+                </div>     
+            </div>
+        </div>
+        <button class="btn btn-primary"
+        (click)="addRow()">Add</button>
+    </form>
+    
+    <p>{{ this.feesForm.value | json }}</p>
+
+    <button class="btn btn-primary"
+    (click)="onSubmit()">Submit</button>
+    <button class="btn btn-outline-secondary"
+    (click)="onReset()">Reset</button>
+</div>
+
