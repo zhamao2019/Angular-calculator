@@ -5,11 +5,13 @@ import { ReactiveFormsModule, FormsModule } from "@angular/forms";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CalculaterComponent } from './calculater/calculater.component';
+import { CalculatorSharedCostComponent } from './calculator-shared-cost/calculator-shared-cost.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    CalculaterComponent
+    CalculaterComponent,
+    CalculatorSharedCostComponent
 
   ],
   imports: [

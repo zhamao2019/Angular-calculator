@@ -1,0 +1,17 @@
+
+<h2 class="h3">Equally Shared Cost</h2>
+
+<form [formGroup]="sharedForm">
+    <div formArrayName="sharedCostArray" class="form-row align-items-center mb-3"
+    *ngFor="let sharedCost of sharedForm.controls; let i=index">
+        <div class="col-sm-4">
+            <input type="text" class="form-control" placeholder="0.00"
+            [formControlName]="i">
+        </div>
+        <div class="col-sm-4">
+            <button (click)="deleteShareCostRow(i)">Delete</button>
+        </div>
+    </div>
+    <button (click)="addShareCostRow()"></button>
+
+</form>

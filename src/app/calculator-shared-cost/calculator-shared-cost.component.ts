@@ -1,32 +1,29 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, FormArray, Validators, FormControl } from "@angular/forms";
 
-
 @Component({
-  selector: 'app-calculater',
-  templateUrl: './calculater.component.html',
-  styleUrls: ['./calculater.component.css']
+  selector: 'app-calculator-shared-cost',
+  templateUrl: './calculator-shared-cost.component.html',
+  styleUrls: ['./calculator-shared-cost.component.css']
 })
-export class CalculaterComponent implements OnInit {
-  feesForm: FormGroup;
+export class CalculatorSharedCostComponent implements OnInit {
+
+  sharedForm: FormGroup;
 
   constructor(private fb: FormBuilder) {}
 
   ngOnInit(): void {
     // init the form
-    this.feesForm = this.fb.group({
-      usersArray: this.fb.array([this.UserGroup()]),
-      sharedCostArray: this.fb.control('')
+    this.sharedForm = this.fb.group({
+      sharedCostArray: this.fb.array([
+        this.fb.control('')
+      ])
     });
   }
 
   // retrieve the userArray's form array
-  get usersArray() {
-    return this.feesForm.get('usersArray') as FormArray;
-  }
-
   get sharedCostArray() {
-    return this.feesForm.get('sharedCostArray') as FormArray;
+    return this.sharedForm.get('sharedCostArray') as FormArray;
   }
 
   // a class of this row
@@ -38,30 +35,15 @@ export class CalculaterComponent implements OnInit {
     });
   }
 
-
-
-  onSubmit() {
-
-  }
-  onReset() {
-    this.usersArray.clear();
-    this.ngOnInit();
-  }
-
   // add a new row
-  addUserRow() {
-    this.usersArray.push(this.UserGroup());
-  }
   addShareCostRow() {
     this.sharedCostArray.push(this.fb.control(''));
   }
 
   // delete this row of data
-  deleteUserRow(index: number) {
-    this.usersArray.removeAt(index);
-  }
   deleteShareCostRow(index: number) {
     this.sharedCostArray.removeAt(index);
   }
+
 
 }
