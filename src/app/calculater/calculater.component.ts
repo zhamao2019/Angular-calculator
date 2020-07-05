@@ -16,7 +16,8 @@ export class CalculaterComponent implements OnInit {
     // init the form
     this.feesForm = this.fb.group({
       usersArray: this.fb.array([this.UserGroup()]),
-      sharedCostArray: this.fb.control('')
+      sharedCostArray: this.fb.array([this.SharedGroup()]),
+      total: ['', Validators.required]
     });
   }
 
@@ -29,6 +30,7 @@ export class CalculaterComponent implements OnInit {
     return this.feesForm.get('sharedCostArray') as FormArray;
   }
 
+
   // a class of this row
   private UserGroup(): FormGroup {
     return this.fb.group({
@@ -38,30 +40,38 @@ export class CalculaterComponent implements OnInit {
     });
   }
 
-
-
-  onSubmit() {
-
+  private SharedGroup(): FormGroup {
+    return this.fb.group({
+      delivery: [''],
+      service: ['']
+    });
   }
+
+  onSubmit(feesFormData) {
+    this.feesForm.reset();
+  }
+
   onReset() {
     this.usersArray.clear();
+    this.sharedCostArray.clear();
     this.ngOnInit();
+    // this.feesForm.reset();
   }
 
   // add a new row
   addUserRow() {
     this.usersArray.push(this.UserGroup());
   }
-  addShareCostRow() {
-    this.sharedCostArray.push(this.fb.control(''));
-  }
+  // addShareCostRow() {
+  //   this.sharedCostArray.push(this.fb.control(''));
+  // }
 
   // delete this row of data
   deleteUserRow(index: number) {
     this.usersArray.removeAt(index);
   }
-  deleteShareCostRow(index: number) {
-    this.sharedCostArray.removeAt(index);
-  }
+  // deleteShareCostRow(index: number) {
+  //   this.sharedCostArray.removeAt(index);
+  // }
 
 }

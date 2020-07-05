@@ -1,8 +1,8 @@
-<form [formGroup]="feesForm" (ngSubmit)="onSubmit()">
+<form [formGroup]="feesForm">
     
 <!-- personal cost form part -->
 <div class="card mb-5">
-    <h5 class="card-header">Personal Fee</h5>
+    <h5 class="card-header">Personal Cost</h5>
     <div class="p-3"
     formArrayName="usersArray"
     *ngFor="let personalCost of usersArray.controls; let i=index">
@@ -35,22 +35,27 @@
 
 <div class="card-deck">
     <!-- Shared Cost form part-->
-    <div class="card border border-light">
+    <div class="card border border-light"
+    formArrayName="sharedCostArray"
+    *ngFor="let sharedCost of sharedCostArray.controls; let i=index">
         <h5 class="card-header">Equally Shared Cost</h5>
-        <div class="form-group p-3">
+        <div class="form-group p-3"
+        [formGroup]="sharedCost">
             <label>Delivery Fees</label>
             <div class="input-group mb-3">
                 <div class="input-group-prepend">
                     <div class="input-group-text">$</div>
                 </div>
-                <input type="text" class="form-control" placeholder="0.00">
+                <input type="text" class="form-control" placeholder="0.00"
+                formControlName="delivery">
             </div>
             <label>Service Fees</label>
             <div class="input-group">
                 <div class="input-group-prepend">
                     <div class="input-group-text">$</div>
                 </div>
-                <input type="text" class="form-control" placeholder="0.00">
+                <input type="text" class="form-control" placeholder="0.00"
+                formControlName="service">
             </div>
         </div>
     </div>
@@ -65,7 +70,8 @@
                 <div class="input-group-prepend">
                     <div class="input-group-text">$</div>
                 </div>
-                <input type="text" class="form-control" placeholder="0.00">
+                <input type="text" class="form-control" placeholder="0.00"
+                formControlName="total">
             </div>
         </div>
     </div>
@@ -75,9 +81,10 @@
 
 <p>{{ this.feesForm.value | json }}</p>
 
-<button class="btn btn-dark mr-3"
-(click)="onSubmit()">Calculate</button>
-<button class="btn btn-light"
+
+<button class="btn btn-dark btn-lg btn-block mb-3"
+(click)="onSubmit( feesForm.value )">Calculate</button>
+<button class="btn btn-info btn-lg btn-block"
 (click)="onReset()">Reset</button>
 
 
